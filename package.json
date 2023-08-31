@@ -1,0 +1,34 @@
+{
+  "name": "ContextSerg",
+  "version": "1.0.0",
+  "description": "site  html scss js",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "gh-pages -d dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sava911/ContextSerg.git"
+  },
+  "keywords": [],
+  "author": "Sava911",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sava911/ContextSerg"
+  },
+  "homepage": "https://sava911.github.io/ContextSerg",
+  "devDependencies": {
+    "browser-sync": "^2.27.10",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^5.1.0",
+    "gulp-uglify": "^3.0.2",
+    "jquery": "^3.6.1",
+    "sass": "^1.56.1"
+  },
+  "dependencies": {
+    "gh-pages": "^6.0.0"
+  }
+}
