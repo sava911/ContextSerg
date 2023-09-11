@@ -1,64 +1,23 @@
-'use strict';
 const gulp = require('gulp');
-const sass = require('gulp-sass')(require('sass'));
-const concat = require('gulp-concat');
-const autoprefixer = require('gulp-autoprefixer');
-const uglify = require('gulp-uglify');
-const browserSync = require('browser-sync').create();
 
-function browsersync() {
-  browserSync.init({
-    server: {
-      baseDir: "app/"
-    },
-    notify: false
+// Tasks
+require('./gulp/dev.js');
+require('./gulp/docs.js');
 
-  });
-}
-function buildStyles() {
-  return gulp.src('app/sass/*.scss')
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-    .pipe(concat('style.min.css'))
-    .pipe(autoprefixer({
-      overrideBrowserslist: ['last 10 version'],
-      grid: true
-    }))
-    .pipe(gulp.dest('app/css'))
-    .pipe(browserSync.stream());
-}
+gulp.task(
+	'default',
+	gulp.series(
+		'clean:dev',
+		gulp.parallel('html:dev', 'sass:dev', 'images:dev', 'fonts:dev', 'files:dev', 'js:dev'),
+		gulp.parallel('server:dev', 'watch:dev')
+	)
+);
 
-function scripts() {
-  return gulp.src([
-    'node_modules/jquery/dist/jquery.js',
-    'app/js/main.js'
-  ])
-    .pipe(concat('main.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('app/js'))
-    .pipe(browserSync.stream());
-
-}
-
-function build() {
-  return gulp.src([
-    "app/**/*.html",
-    "app/css/style.min.css",
-    "app/js/main.min.js",
-  ], {base: 'app'})
-    .pipe(gulp.dest('dist'))
-}
-
-
-function watching() {
-  gulp.watch('app/sass/**/*.scss', buildStyles);
-  gulp.watch(['app/js/**/*.js', '!app/js/main.min.js'], scripts);
-  gulp.watch("app/**/*.html").on('change', browserSync.reload);
-};
-
-exports.buildStyles = buildStyles;
-exports.scripts = scripts;
-exports.browsersync = browsersync;
-exports.watching = watching;
-exports.build = gulp.series(build);
-
-exports.default = gulp.parallel(buildStyles, scripts, browsersync, watching)
+gulp.task(
+	'docs',
+	gulp.series(
+		'clean:docs',
+		gulp.parallel('html:docs', 'sass:docs', 'images:docs', 'fonts:docs', 'files:docs', 'js:docs'),
+		gulp.parallel('server:docs')
+	)
+);
