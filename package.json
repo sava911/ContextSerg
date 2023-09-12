@@ -1,4 +1,12 @@
 {
+  "name": "ContextSerg",
+  "version": "1.0.0",
+  "description": "site shop html scss js",
+
+  "scripts": {
+    "deploy": "gh-pages -d build"
+  },
+  "homepage": "https://sava911.github.io/ContextSerg",
 	"devDependencies": {
 		"@babel/core": "^7.22.5",
 		"@babel/preset-env": "^7.22.5",
@@ -35,5 +43,8 @@
 	},
 	"browserslist": [
 		"last 5 versions"
-	]
+	],
+	"dependencies": {
+		"gh-pages": "^6.0.0"
+	}
 }
